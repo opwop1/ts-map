@@ -1,4 +1,4 @@
-﻿using System.Drawing;
+using System.Drawing;
 
 namespace TsMap.Canvas
 {
@@ -13,7 +13,7 @@ namespace TsMap.Canvas
             PrefabDark = new SolidBrush(Color.FromArgb(225, 163, 56));
             PrefabGreen = new SolidBrush(Color.FromArgb(170, 203, 150)); // TODO: Check if green has a specific z-index
 
-            CityName = Brushes.LightCoral;
+            CityName = Brushes.White;
 
             FerryLines = new SolidBrush(Color.FromArgb(80, 255, 255, 255));
 

@@ -18,7 +18,7 @@ namespace TsMap
         private int[] zoomCaps = { 1000, 5000, 18500, 45000 };
 
         private readonly Font _defaultFont = new Font("Arial", 10.0f, FontStyle.Bold);
-        private readonly SolidBrush _cityShadowColor = new SolidBrush(Color.FromArgb(210, 0, 0, 0));
+        private readonly SolidBrush _cityNameBackgroundColor = new SolidBrush(Color.FromArgb(110, 0, 0, 0));
 
         public TsMapRenderer(TsMapper mapper)
         {
@@ -453,7 +453,10 @@ namespace TsMap
                     }
 
                     var textSize = g.MeasureString(name, cityFont);
-                    g.DrawString(name, cityFont, _cityShadowColor, coords.X + 2, coords.Y + 2);
+                    var pad = textSize.Height * 0.1f;
+                    // Draw a slight semi-transparent black background behind the city name to make white text readable
+                    g.FillRectangle(_cityNameBackgroundColor,
+                        coords.X - pad, coords.Y - pad, textSize.Width + pad * 2, textSize.Height + pad * 2);
                     g.DrawString(name, cityFont, palette.CityName, coords.X, coords.Y);
                 }
                 cityFont.Dispose();
