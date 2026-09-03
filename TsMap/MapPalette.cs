@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+using System;
+using System.Drawing;
 
 namespace TsMap
 {
@@ -48,5 +49,34 @@ namespace TsMap
         /// Brush for error text
         /// </summary>
         public Brush Error;
+
+        /// <summary>
+        /// 设置路线颜色 (导出瓦片用): White = 还原默认配色, 其他颜色 = 单色路线
+        /// </summary>
+        public void SetRoadColor(Color color)
+        {
+            if (color == Color.White)
+            {
+                Road = Brushes.White;
+                PrefabRoad = Brushes.White;
+                PrefabLight = new SolidBrush(Color.FromArgb(236, 203, 153));
+                PrefabDark = new SolidBrush(Color.FromArgb(225, 163, 56));
+            }
+            else
+            {
+                var brush = new SolidBrush(color);
+                Road = brush;
+                PrefabRoad = brush;
+                // 立交/路口路面多边形: 与路线同色系, 仅轻微明暗变化(避免看起来发白)
+                PrefabLight = new SolidBrush(Color.FromArgb(
+                    Math.Min(255, color.R + 10),
+                    Math.Min(255, color.G + 8),
+                    Math.Max(0, color.B - 10)));
+                PrefabDark = new SolidBrush(Color.FromArgb(
+                    (int)(color.R * 0.88),
+                    (int)(color.G * 0.88),
+                    (int)(color.B * 0.88)));
+            }
+        }
     }
 }

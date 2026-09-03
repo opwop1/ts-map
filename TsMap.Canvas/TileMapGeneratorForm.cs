@@ -1,4 +1,5 @@
-﻿using System;
+using System;
+using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 
@@ -7,7 +8,7 @@ namespace TsMap.Canvas
     public partial class TileMapGeneratorForm : Form
     {
         public delegate void GenerateTileMapEvent(string exportPath, int startZoomLevel, int endZoomLevel,
-            bool createTiles, ExportFlags exportFlags, RenderFlags renderFlags);
+            bool createTiles, ExportFlags exportFlags, RenderFlags renderFlags, Color roadColor);
 
         public GenerateTileMapEvent GenerateTileMap;
         public TileMapGeneratorForm(string lastTileMapPath, RenderFlags renderFlags)
@@ -76,13 +77,18 @@ namespace TsMap.Canvas
             var startZoomLevel = Convert.ToInt32(Math.Round(StartZoomLevelBox.Value, 0));
             var endZoomLevel = Convert.ToInt32(Math.Round(EndZoomLevelBox.Value, 0));
 
+            // 路线颜色: Yellow = (255, 200, 77), White = 还原默认配色
+            var roadColor = RoadColorComboBox.SelectedIndex == 1
+                ? Color.FromArgb(255, 200, 77)
+                : Color.White;
+
             var res = folderBrowserDialog1.ShowDialog();
             if (res == DialogResult.OK)
             {
                 if (!Directory.Exists(folderBrowserDialog1.SelectedPath)) return;
 
                 GenerateTileMap(folderBrowserDialog1.SelectedPath, startZoomLevel, endZoomLevel, GenTilesCheck.Checked,
-                    GetExportFlags(), GetRenderFlags());
+                    GetExportFlags(), GetRenderFlags(), roadColor);
             }
         }
 

@@ -1,4 +1,4 @@
-﻿namespace TsMap.Canvas
+namespace TsMap.Canvas
 {
     partial class TileMapGeneratorForm
     {
@@ -118,7 +118,30 @@
             0,
             0,
             0});
-            // 
+            //
+            // RoadColorLabel
+            //
+            this.RoadColorLabel = new System.Windows.Forms.Label();
+            this.RoadColorLabel.AutoSize = true;
+            this.RoadColorLabel.Location = new System.Drawing.Point(7, 64);
+            this.RoadColorLabel.Name = "RoadColorLabel";
+            this.RoadColorLabel.Size = new System.Drawing.Size(58, 13);
+            this.RoadColorLabel.TabIndex = 14;
+            this.RoadColorLabel.Text = "Road Color";
+            //
+            // RoadColorComboBox
+            //
+            this.RoadColorComboBox = new System.Windows.Forms.ComboBox();
+            this.RoadColorComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.RoadColorComboBox.Items.AddRange(new object[] {
+            "White",
+            "Yellow"});
+            this.RoadColorComboBox.Location = new System.Drawing.Point(78, 60);
+            this.RoadColorComboBox.Name = "RoadColorComboBox";
+            this.RoadColorComboBox.Size = new System.Drawing.Size(98, 21);
+            this.RoadColorComboBox.TabIndex = 15;
+            this.RoadColorComboBox.SelectedIndex = 0;
+            //
             // CityNamesCheckBox
             // 
             this.CityNamesCheckBox.AutoSize = true;
@@ -249,7 +272,7 @@
             // 
             // triStateTreeView1
             // 
-            this.triStateTreeView1.Location = new System.Drawing.Point(10, 59);
+            this.triStateTreeView1.Location = new System.Drawing.Point(10, 85);
             this.triStateTreeView1.Name = "triStateTreeView1";
             treeNode1.Checked = true;
             treeNode1.Name = "GenTileMapInfo";
@@ -278,7 +301,7 @@
             treeNode3,
             treeNode5,
             treeNode7});
-            this.triStateTreeView1.Size = new System.Drawing.Size(166, 149);
+            this.triStateTreeView1.Size = new System.Drawing.Size(166, 123);
             this.triStateTreeView1.TabIndex = 13;
             // 
             // TileMapGeneratorForm
@@ -286,6 +309,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(337, 244);
+            this.Controls.Add(this.RoadColorComboBox);
+            this.Controls.Add(this.RoadColorLabel);
             this.Controls.Add(this.triStateTreeView1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.GenTilesCheck);
@@ -328,5 +353,7 @@
         private TriStateTreeView triStateTreeView1;
         private System.Windows.Forms.CheckBox SecretRoadsCheckBox;
         private System.Windows.Forms.CheckBox BusStopOverlayCheckBox;
+        private System.Windows.Forms.Label RoadColorLabel;
+        private System.Windows.Forms.ComboBox RoadColorComboBox;
     }
 }

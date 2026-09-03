@@ -30,7 +30,7 @@ namespace TsMap.Canvas
         private PointF _lastPoint;
         private PointF _startPoint;
         private float _scale = 0.2f;
-        private readonly int tileSize = 256;
+        private readonly int tileSize = 512; // 与线上 mapinfo.js 的瓦片体系保持一致
         private int mapPadding = 500;
 
         private bool _isGeneratingTileMap;
@@ -299,11 +299,13 @@ namespace TsMap.Canvas
             _tileMapGeneratorForm.Show();
             _tileMapGeneratorForm.BringToFront();
 
-            _tileMapGeneratorForm.GenerateTileMap += (exportPath, startZoomLevel, endZoomLevel, createTiles, exportFlags, renderFlags) => // Called when export button is pressed in TileMapGeneratorForm
+            _tileMapGeneratorForm.GenerateTileMap += (exportPath, startZoomLevel, endZoomLevel, createTiles, exportFlags, renderFlags, roadColor) => // Called when export button is pressed in TileMapGeneratorForm
             {
                 _tileMapGeneratorForm.Close();
                 _appSettings.LastTileMapPath = exportPath;
                 JsonHelper.SaveSettings(_appSettings);
+                _palette.SetRoadColor(roadColor); // 应用所选路线颜色 (White = 还原默认配色)
+                foreach (var prefabItem in _mapper.Prefabs) prefabItem.ClearLooks(); // 清除缓存的白色图形, 导出时用新颜色重建
                 _mapper.ExportInfo(exportFlags, exportPath);
 
                 if (startZoomLevel < 0 || endZoomLevel < 0) return;

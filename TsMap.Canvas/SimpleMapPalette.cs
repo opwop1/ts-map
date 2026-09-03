@@ -6,7 +6,7 @@ namespace TsMap.Canvas
     {
         public SimpleMapPalette()
         {
-            Background = new SolidBrush(Color.FromArgb(72, 78, 102));
+            Background = new SolidBrush(Color.Transparent); // 透明背景，仅渲染路线时瓦片无底色，便于叠加
             Road = Brushes.White;
             PrefabRoad = Brushes.White;
             PrefabLight = new SolidBrush(Color.FromArgb(236, 203, 153));

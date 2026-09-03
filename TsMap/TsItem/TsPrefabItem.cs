@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using TsMap.Common;
@@ -32,6 +32,14 @@ namespace TsMap.TsItem
         public bool HasLooks()
         {
             return _looks != null && _looks.Count != 0;
+        }
+
+        /// <summary>
+        /// 清除缓存的绘制图形(切换调色板颜色后调用, 使下次渲染用新颜色重建)
+        /// </summary>
+        public void ClearLooks()
+        {
+            _looks.Clear();
         }
 
         public TsPrefabItem(TsSector sector, int startOffset) : base(sector, startOffset)
